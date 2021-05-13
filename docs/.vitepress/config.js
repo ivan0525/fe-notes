@@ -1,4 +1,4 @@
-const { getPages, generateSideBar } = require('../utils/index');
+const { generateSideBar } = require('../utils/index');
 module.exports = {
   base: '/fe-notes/',
   title: '前端笔记',
