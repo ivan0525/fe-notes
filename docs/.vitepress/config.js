@@ -15,6 +15,7 @@ module.exports = {
       { text: '基础', link: '/basic/' },
       { text: 'js', link: '/js/' },
       { text: '算法', link: '/algorithm/' },
+      {text: '其他', link: '/others/'}
     ],
     searchMaxSuggestions: 10,
     sidebar: {
