@@ -4,7 +4,7 @@ module.exports = {
   title: '前端笔记',
   description: '前端开发学习、踩坑笔记',
   head: [
-    ["link", { rel: "icon", href: "/logo.png", type: "image/png" }],
+    ["link", { rel: "icon", href: "/fe-notes/logo.png", type: "image/png" }],
     ["meta", { name: "author", content: "Ivan0525" }],
   ],
   themeConfig: {
