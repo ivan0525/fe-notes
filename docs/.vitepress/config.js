@@ -19,7 +19,10 @@ module.exports = {
     ],
     searchMaxSuggestions: 10,
     sidebar: {
-      '/basic/': generateSideBar('basic', "基础")
+      '/basic/': generateSideBar('basic', "基础部分"),
+      '/algorithm/': generateSideBar('algorithm', "算法相关"),
+      '/js/': generateSideBar('js', "JavaScript相关"),
+      '/others/': generateSideBar('others', '随笔')
     }
   }
 };

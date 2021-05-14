@@ -25,7 +25,7 @@ function generateSideBar(dirName, title) {
   pages.forEach((page) => {
     sideBar[0].children.push({
       text: capitalize(page),
-      link: `/${dirName}/${page}/`
+      link: `/${dirName}/${page}/`,
     })
   });
   return sideBar;
