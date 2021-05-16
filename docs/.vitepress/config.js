@@ -10,6 +10,10 @@ module.exports = {
   themeConfig: {
     repo: 'ivan0525/fe-notes',
     docsBranch: 'main',
+    docsDir: 'docs',
+    editLinks: true,
+    editLinkText: '愿意帮助我？',
+    lastUpdated: "上次更新",
     logo: '/logo.png',
     nav: [
       { text: '基础', link: '/basic/' },
@@ -17,7 +21,6 @@ module.exports = {
       { text: '算法', link: '/algorithm/' },
       {text: '其他', link: '/others/'}
     ],
-    searchMaxSuggestions: 10,
     sidebar: {
       '/basic/': generateSideBar('basic', "基础部分"),
       '/algorithm/': generateSideBar('algorithm', "算法相关"),
