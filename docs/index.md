@@ -7,11 +7,11 @@ tagline: 前端学习、踩坑笔记
 actionText: 👉 开始学习
 actionLink: /basic/
 features:
-  - title: Simplicity First
-    details: Minimal setup with markdown-centered project structure helps you focus on writing.
-  - title: Vue-Powered
-    details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-  - title: Performant
-    details: VitePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+  - title: 持续学习
+    details: 今天不学习，明天变垃圾
+  - title: 实践出真知
+    details: 多动手去写，加深印象，将知识变成自己的
+  - title: 日积月累
+    details: 每天进步一点点，量变引起质变
 footer: MIT Licensed | Copyright © 2021-present Ivan0525
 ---
