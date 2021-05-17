@@ -26,6 +26,10 @@ module.exports = {
       '/algorithm/': generateSideBar('algorithm', "算法相关"),
       '/js/': generateSideBar('js', "JavaScript相关"),
       '/others/': generateSideBar('others', '随笔')
+    },
+    algolia: {
+      apiKey: '25626fae796133dc1e734c6bcaaeac3c',
+      indexName: 'docsearch'
     }
   }
 };
