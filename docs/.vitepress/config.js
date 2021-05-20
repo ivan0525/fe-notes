@@ -26,10 +26,6 @@ module.exports = {
       '/algorithm/': generateSideBar('algorithm', "算法相关"),
       '/js/': generateSideBar('js', "JavaScript相关"),
       '/others/': generateSideBar('others', '随笔')
-    },
-    algolia: {
-      apiKey: '2222407df170ece631f1fb6c7043e2bf',
-      indexName: 'test'
     }
   }
 };
