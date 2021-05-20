@@ -28,8 +28,8 @@ module.exports = {
       '/others/': generateSideBar('others', '随笔')
     },
     algolia: {
-      apiKey: '25626fae796133dc1e734c6bcaaeac3c',
-      indexName: 'docsearch'
+      apiKey: '2222407df170ece631f1fb6c7043e2bf',
+      indexName: 'test'
     }
   }
 };
