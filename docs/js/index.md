@@ -13,3 +13,15 @@ pageClass: custom-page-class
 > 防抖：让高频执行的动作在单位时间内只会执行一次，也就是说如果该动作在单位时间内再次触发，则重新就算时间。
 
 <<< @/js/debounce.ts
+
+### 2.2 `Object.is` polyfill
+> `Object.is` 方法用来判断两个值是否是同一个。（该方法与`===`几乎相同，区别在于前者对`NaN`和`+0`和`-0`进行了特殊处理）。
+```js
+NaN === NaN // false
+-0 === +0 // true
+1/+0 === Infinity
+1/-0 === -Infinity
+Infinity === -Infinity // false
+```
+
+<<< @/js/objectIs.js
