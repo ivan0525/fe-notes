@@ -25,3 +25,8 @@ Infinity === -Infinity // false
 ```
 
 <<< @/js/objectIs.js
+
+## 3. 源码解析
+### 3.1 React源码解析
+
+<<< @/js/react-source-code.md
