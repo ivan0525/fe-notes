@@ -1,0 +1,1 @@
+import{o as n,c as s,a}from"./app.d9954252.js";const t='{"title":"","description":"","frontmatter":{},"relativePath":"js/react-source-code.md","lastUpdated":1622649374549}',p={},e=a('',5);p.render=function(a,t,p,o,c,u){return n(),s("div",null,[e])};export default p;export{t as __pageData};
