@@ -26,7 +26,80 @@ Infinity === -Infinity // false
 
 <<< @/js/objectIs.js
 
-## 3. 源码解析
-### 3.1 React源码解析
+## 3. 数据处理
+### 3.1 扁平数据解构转树状结构
+```js
+let arr = [
+  { id: 1, name: '部门1', parentId: 0 },
+  { id: 2, name: '部门2', parentId: 1 },
+  { id: 5, name: '部门5', parentId: 4 },
+  { id: 4, name: '部门4', parentId: 3 },
+  { id: 3, name: '部门3', parentId: 1 },
+];
+/**
+ * 结果
+    [{
+        "id": 1,
+        "name": "部门1",
+        "parentId": 0,
+        "children": [{
+          "id": 2,
+          "name": "部门2",
+          "parentId": 1,
+          "children": []
+        }, {
+          "id": 3,
+          "name": "部门3",
+          "parentId": 1,
+          "children": [{
+            "id": 4,
+            "name": "部门4",
+            "parentId": 3,
+            "children": [{
+              "id": 5,
+              "name": "部门5",
+              "parentId": 4,
+              "children": []
+            }]
+          }]
+        }]
+      }]
+*/
+
+function arrayToTree(arr) {
+  const result = [];
+  const map = {};
+  for (let i = 0; i < arr.length; i++) {
+    const item = arr[i];
+    const { id, parentId } = item;
+    if (!map[id]) {
+      map[id] = {
+        children: []
+      }
+    }
+    map[id] = {
+      ...item,
+      children: map[id].children
+    }
+    const leaf = map[id];
+    // 这里假设初始id为0
+    if (parentId === 0) {
+      result.push(leaf);
+    } else {
+      if (!map[parentId]) {
+        map[parentId] = {
+          children: []
+        }
+      }
+      map[parentId].children.push(leaf);
+    }
+  }
+  return result;
+}
+console.log(JSON.stringify(arrayToTree(arr)));
+```
+
+## 4. 源码解析
+### 4.1 React源码解析
 
 <<< @/js/react-source-code.md
