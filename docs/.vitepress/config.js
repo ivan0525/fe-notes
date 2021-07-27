@@ -18,13 +18,15 @@ module.exports = {
     nav: [
       { text: '基础', link: '/basic/' },
       { text: 'js', link: '/js/' },
+      { text: 'webpack', link: '/webpack/' },
       { text: '算法', link: '/algorithm/' },
-      {text: '其他', link: '/others/'}
+      { text: '其他', link: '/others/' }
     ],
     sidebar: {
       '/basic/': generateSideBar('basic', "基础部分"),
-      '/algorithm/': generateSideBar('algorithm', "算法相关"),
       '/js/': generateSideBar('js', "JavaScript相关"),
+      '/webpack/': generateSideBar('webpack', 'webpack相关'),
+      '/algorithm/': generateSideBar('algorithm', "算法相关"),
       '/others/': generateSideBar('others', '随笔')
     }
   }

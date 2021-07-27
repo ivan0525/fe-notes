@@ -1,6 +1,3 @@
----
-pageClass: custom-page-class
----
 # Javascript相关
 
 ## 1. 设计模式
