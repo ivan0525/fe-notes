@@ -1,0 +1,1 @@
+import{o as e,c as a,a as d}from"./app.2f206302.js";const o='{"title":"Webpack相关","description":"","frontmatter":{},"headers":[{"level":3,"title":"loaders","slug":"loaders"}],"relativePath":"webpack/index.md","lastUpdated":1627345187734}',r={},l=d('',5);r.render=function(d,o,r,c,i,t){return e(),a("div",null,[l])};export default r;export{o as __pageData};
