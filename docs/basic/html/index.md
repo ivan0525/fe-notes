@@ -1,6 +1,6 @@
 # html相关
 
-### 2. viewport
+## 1. viewport
 ```html
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 // width    设置viewport宽度，为一个正整数，或字符串‘device-width’
@@ -20,14 +20,14 @@
     - `mate`标签中的`viewport`属性 ，`initial-scale`设置为 0.5；
     - `rem`（像素）按照设计图来；
 
-### 3. HTML5 为什么只需要写 <!DOCTYPE HTML>
+## 2. HTML5 为什么只需要写 <!DOCTYPE HTML>
 > 文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。
 
 DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用。
 - `HTML5`不基于`SGML`，因此不需要对`DTD`进行引用，但是需要`doctype`来规范浏览器的行为;
 - 而`HTML4.0.1`需要基于`SGML`，因此需要引用`DTD`，才能告知浏览器文档所使用的文档类型；
 
-### 4. HTML全局属性(global attribute)有哪些
+## 3. HTML全局属性(global attribute)有哪些
 - `class`：为`HTML`元素设置类标识；
 - `data-*`：为元素增加自定义属性；
 - `draggable`：设置元素是否可拖拽；
