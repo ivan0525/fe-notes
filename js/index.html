@@ -1,178 +1,72 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>
-      Javascript相关 | 前端笔记
-    </title>
-    <meta name="description" content="前端开发学习、踩坑笔记">
-    <link rel="stylesheet" href="/fe-notes/assets/style.a1953eb2.css">
-    <link rel="modulepreload" href="/fe-notes/assets/Home.e3f552d3.js">
-    <link rel="modulepreload" href="/fe-notes/assets/app.a2fcf4d3.js">
-    <link rel="modulepreload" href="/fe-notes/assets/js_index.md.de466f0b.lean.js">
-    <link rel="modulepreload" href="/fe-notes/assets/app.a2fcf4d3.js">
-    <link rel="icon" href="/fe-notes/logo.png" type="image/png">
-    <meta name="author" content="Ivan0525">
-    
+    <meta name="generator" content="VuePress 2.0.0-beta.34">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <link rel="icon" href="/fe-notes/logo.png" type="image/png"><meta name="author" content="Ivan0525"><title>Javascript相关 | 前端笔记</title><meta name="description" content="前端开发学习、踩坑笔记">
+    <link rel="modulepreload" href="/fe-notes/assets/app.b8de8cc4.js"><link rel="modulepreload" href="/fe-notes/assets/index.html.9112b5f3.js"><link rel="modulepreload" href="/fe-notes/assets/plugin-vue_export-helper.21dcd24c.js"><link rel="modulepreload" href="/fe-notes/assets/index.html.acaa0851.js">
+    <link rel="stylesheet" href="/fe-notes/assets/style.e82a5799.css">
   </head>
   <body>
-    <div id="app"><!--[--><div class="theme"><header class="nav-bar" data-v-5df6160f><div class="sidebar-button" data-v-5df6160f><svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z" class></path></svg></div><a class="nav-bar-title" href="/fe-notes/" aria-label="前端笔记, back to home" data-v-5df6160f data-v-8dbfef3c><img class="logo" src="/fe-notes/logo.png" alt="Logo" data-v-8dbfef3c> 前端笔记</a><div class="flex-grow" data-v-5df6160f></div><div class="nav" data-v-5df6160f><nav class="nav-links" data-v-5df6160f data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/basic/" data-v-45eb32c6>基础 <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/js/" data-v-45eb32c6>js <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/webpack/" data-v-45eb32c6>webpack <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/algorithm/" data-v-45eb32c6>算法 <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/others/" data-v-45eb32c6>其他 <!----></a></div></div><!--]--><!----><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/ivan0525/fe-notes" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav></div><!--[--><!--]--></header><aside class="sidebar" data-v-58e261f2><nav class="nav-links nav" data-v-58e261f2 data-v-38e3b123><!--[--><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/basic/" data-v-45eb32c6>基础 <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/js/" data-v-45eb32c6>js <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/webpack/" data-v-45eb32c6>webpack <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/algorithm/" data-v-45eb32c6>算法 <!----></a></div></div><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item" href="/fe-notes/others/" data-v-45eb32c6>其他 <!----></a></div></div><!--]--><!----><div class="item" data-v-38e3b123><div class="nav-link" data-v-38e3b123 data-v-45eb32c6><a class="item isExternal" href="https://github.com/ivan0525/fe-notes" target="_blank" rel="noopener noreferrer" data-v-45eb32c6>GitHub <svg class="icon outbound" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-45eb32c6><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav><!--[--><!--]--><ul class="sidebar-links" data-v-58e261f2><!--[--><li class="sidebar-link"><a class="sidebar-link-item active" href="/fe-notes/js/">JavaScript相关</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#_1-设计模式">1. 设计模式</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#_1-1-发布订阅（观察者模式）">1.1 发布订阅（观察者模式）</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="#_2-常用工具函数">2. 常用工具函数</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#_2-1-防抖函数">2.1 防抖函数</a><!----></li><li class="sidebar-link"><a class="sidebar-link-item" href="#_2-2-object-is-polyfill">2.2 Object.is polyfill</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="#_3-数据处理">3. 数据处理</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#_3-1-扁平数据解构转树状结构">3.1 扁平数据解构转树状结构</a><!----></li></ul></li><li class="sidebar-link"><a class="sidebar-link-item" href="#_4-源码解析">4. 源码解析</a><ul class="sidebar-links"><li class="sidebar-link"><a class="sidebar-link-item" href="#_4-1-react源码解析">4.1 React源码解析</a><!----></li></ul></li></ul></li><!--]--></ul><!--[--><!--]--></aside><!-- TODO: make this button accessible --><div class="sidebar-mask"></div><main class="page" data-v-d36a7fda><div class="container" data-v-d36a7fda><!--[--><!--]--><div class="content" data-v-d36a7fda><div data-v-d36a7fda><h1 id="javascript相关"><a class="header-anchor" href="#javascript相关" aria-hidden="true">#</a> Javascript相关</h1><h2 id="_1-设计模式"><a class="header-anchor" href="#_1-设计模式" aria-hidden="true">#</a> 1. 设计模式</h2><h3 id="_1-1-发布订阅（观察者模式）"><a class="header-anchor" href="#_1-1-发布订阅（观察者模式）" aria-hidden="true">#</a> 1.1 发布订阅（观察者模式）</h3><div class="language-js"><pre><code><span class="token keyword">const</span> Event <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">let</span> clientList <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    listen<span class="token punctuation">,</span>
-    trigger<span class="token punctuation">,</span>
-    remove<span class="token punctuation">;</span>
-  <span class="token function-variable function">listen</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>clientList<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      clientList<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    clientList<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token function-variable function">trigger</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> key <span class="token operator">=</span> <span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arguments<span class="token punctuation">)</span><span class="token punctuation">,</span>
-      fns <span class="token operator">=</span> clientList<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fns <span class="token operator">||</span> fns<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> fn<span class="token punctuation">;</span> fn <span class="token operator">=</span> fns<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token function-variable function">remove</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">let</span> fns <span class="token operator">=</span> clientList<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fns<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      fns <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>fns<span class="token punctuation">.</span>length <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> fns<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">const</span> _fn <span class="token operator">=</span> fns<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>_fn <span class="token operator">===</span> fn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          fns<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    listen<span class="token punctuation">,</span>
-    trigger<span class="token punctuation">,</span>
-    remove
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Event<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token string">&#39;SquareMeter88&#39;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">price</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">//订阅消息</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">价格= </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>price<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// log: &#39;价格= 1999999&#39;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Event<span class="token punctuation">.</span><span class="token function">trigger</span><span class="token punctuation">(</span><span class="token string">&#39;SquareMeter88&#39;</span><span class="token punctuation">,</span> <span class="token number">1999999</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 发布消息</span>
-</code></pre></div><h2 id="_2-常用工具函数"><a class="header-anchor" href="#_2-常用工具函数" aria-hidden="true">#</a> 2. 常用工具函数</h2><h3 id="_2-1-防抖函数"><a class="header-anchor" href="#_2-1-防抖函数" aria-hidden="true">#</a> 2.1 防抖函数</h3><blockquote><p>防抖：让高频执行的动作在单位时间内只会执行一次，也就是说如果该动作在单位时间内再次触发，则重新就算时间。</p></blockquote><div class="language-ts"><pre><code><span class="token comment">/**
- * @description 防抖函数
- * @param {Function} func 需要包装的函数
- * @param {Number} delay 延迟时间，单位ms
- * @param {Boolean} immediate 是否立即执行
- * @returns {Function}
- */</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> debounce <span class="token operator">=</span> <span class="token punctuation">(</span>
-  func<span class="token operator">:</span> <span class="token builtin">Function</span><span class="token punctuation">,</span>
-  delay <span class="token operator">=</span> <span class="token number">300</span><span class="token punctuation">,</span>
-  immediate <span class="token operator">=</span> <span class="token boolean">true</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Function</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">let</span> timeout<span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> ReturnType<span class="token operator">&lt;</span><span class="token keyword">typeof</span> setTimeout<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">null</span>
-  <span class="token keyword">let</span> args<span class="token operator">:</span> <span class="token builtin">any</span>
-  <span class="token keyword">let</span> context<span class="token operator">:</span> <span class="token builtin">any</span>
-  <span class="token keyword">let</span> timestamp<span class="token operator">:</span> <span class="token builtin">number</span>
-  <span class="token keyword">let</span> result<span class="token operator">:</span> <span class="token builtin">Function</span>
-  <span class="token keyword">const</span> <span class="token function-variable function">later</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 当前的时间戳与上一个时间戳做对比</span>
-    <span class="token keyword">const</span> left <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> timestamp
-    <span class="token comment">// 如果当前时间间隔小于设置的延迟时间且大于0就重置定时器</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">&lt;</span> delay <span class="token operator">&amp;&amp;</span> left <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      timeout <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>later<span class="token punctuation">,</span> delay <span class="token operator">-</span> left<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token comment">// 清除定时器，执行回调</span>
-      timeout <span class="token operator">=</span> <span class="token keyword">null</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>immediate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
-        result <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          context <span class="token operator">=</span> <span class="token keyword">null</span>
-          args <span class="token operator">=</span> <span class="token keyword">null</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    args <span class="token operator">=</span> arguments
-    <span class="token comment">// 获得时间戳</span>
-    timestamp <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment">// 如果定时器不存在且立即执行函数</span>
-    <span class="token keyword">var</span> callNow <span class="token operator">=</span> immediate <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>timeout
-    <span class="token comment">// 如果定时器不存在就创建一个</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>timeout<span class="token punctuation">)</span> timeout <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span>later<span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
-    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>callNow<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// 如果需要立即执行函数的话 通过 apply 执行</span>
-      result <span class="token operator">=</span> <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-      context <span class="token operator">=</span> args <span class="token operator">=</span> <span class="token keyword">null</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> result
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre></div><h3 id="_2-2-object-is-polyfill"><a class="header-anchor" href="#_2-2-object-is-polyfill" aria-hidden="true">#</a> 2.2 <code>Object.is</code> polyfill</h3><blockquote><p><code>Object.is</code> 方法用来判断两个值是否是同一个。（该方法与<code>===</code>几乎相同，区别在于前者对<code>NaN</code>和<code>+0</code>和<code>-0</code>进行了特殊处理）。</p></blockquote><div class="language-js"><pre><code><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header ref_key="navbar" class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a href="/fe-notes/" class=""><img class="logo" src="/fe-notes/logo.png" alt="前端笔记"><span class="site-name can-hide">前端笔记</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide"><!--[--><div class="navbar-item"><a href="/fe-notes/basic/" class="" aria-label="基础"><!--[--><!--]--> 基础 <!--[--><!--]--></a></div><div class="navbar-item"><a aria-current="page" href="/fe-notes/js/" class="router-link-active router-link-exact-active router-link-active" aria-label="js"><!--[--><!--]--> js <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/webpack/" class="" aria-label="webpack"><!--[--><!--]--> webpack <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/algorithm/" class="" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/others/" class="" aria-label="其他"><!--[--><!--]--> 其他 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/ivan0525/fe-notes" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-dark-button" title="toggle dark mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items"><!--[--><div class="navbar-item"><a href="/fe-notes/basic/" class="" aria-label="基础"><!--[--><!--]--> 基础 <!--[--><!--]--></a></div><div class="navbar-item"><a aria-current="page" href="/fe-notes/js/" class="router-link-active router-link-exact-active router-link-active" aria-label="js"><!--[--><!--]--> js <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/webpack/" class="" aria-label="webpack"><!--[--><!--]--> webpack <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/algorithm/" class="" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/others/" class="" aria-label="其他"><!--[--><!--]--> 其他 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/ivan0525/fe-notes" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><a aria-current="page" href="/fe-notes/js/" class="router-link-active router-link-exact-active router-link-active sidebar-item sidebar-heading active" aria-label="JavaScript相关"><!--[--><!--]--> JavaScript相关 <!--[--><!--]--></a><!----></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><h1 id="javascript相关" tabindex="-1"><a class="header-anchor" href="#javascript相关" aria-hidden="true">#</a> Javascript相关</h1><h2 id="_1-设计模式" tabindex="-1"><a class="header-anchor" href="#_1-设计模式" aria-hidden="true">#</a> 1. 设计模式</h2><h3 id="_1-1-发布订阅-观察者模式" tabindex="-1"><a class="header-anchor" href="#_1-1-发布订阅-观察者模式" aria-hidden="true">#</a> 1.1 发布订阅（观察者模式）</h3><p>&lt;&lt;&lt; @/js/observer/index.js</p><h2 id="_2-常用工具函数" tabindex="-1"><a class="header-anchor" href="#_2-常用工具函数" aria-hidden="true">#</a> 2. 常用工具函数</h2><h3 id="_2-1-防抖函数" tabindex="-1"><a class="header-anchor" href="#_2-1-防抖函数" aria-hidden="true">#</a> 2.1 防抖函数</h3><blockquote><p>防抖：让高频执行的动作在单位时间内只会执行一次，也就是说如果该动作在单位时间内再次触发，则重新就算时间。</p></blockquote><p>&lt;&lt;&lt; @/js/debounce.ts</p><h3 id="_2-2-object-is-polyfill" tabindex="-1"><a class="header-anchor" href="#_2-2-object-is-polyfill" aria-hidden="true">#</a> 2.2 <code>Object.is</code> polyfill</h3><blockquote><p><code>Object.is</code> 方法用来判断两个值是否是同一个。（该方法与<code>===</code>几乎相同，区别在于前者对<code>NaN</code>和<code>+0</code>和<code>-0</code>进行了特殊处理）。</p></blockquote><div class="language-javascript ext-js line-numbers-mode"><pre class="language-javascript"><code><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
 <span class="token operator">-</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">+</span><span class="token number">0</span> <span class="token comment">// true</span>
 <span class="token number">1</span><span class="token operator">/</span><span class="token operator">+</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token number">Infinity</span>
 <span class="token number">1</span><span class="token operator">/</span><span class="token operator">-</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">Infinity</span>
 <span class="token number">Infinity</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">Infinity</span> <span class="token comment">// false</span>
-</code></pre></div><div class="language-js"><pre><code><span class="token comment">/**
- * polyfill Object.is
- * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/is
- * @param {*} x 
- * @param {*} y 
- * @returns 
- */</span>
-<span class="token keyword">function</span> <span class="token function">is</span><span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> y <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>x <span class="token operator">!==</span><span class="token number">0</span> <span class="token operator">||</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token operator">!==</span> <span class="token number">1</span> <span class="token operator">/</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>x <span class="token operator">!==</span> x <span class="token operator">&amp;&amp;</span> y <span class="token operator">!==</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">objectIs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">typeof</span> Object<span class="token punctuation">.</span>is <span class="token operator">===</span> <span class="token string">&#39;function&#39;</span> <span class="token operator">?</span> Object<span class="token punctuation">.</span>is <span class="token operator">:</span> is<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre></div><h2 id="_3-数据处理"><a class="header-anchor" href="#_3-数据处理" aria-hidden="true">#</a> 3. 数据处理</h2><h3 id="_3-1-扁平数据解构转树状结构"><a class="header-anchor" href="#_3-1-扁平数据解构转树状结构" aria-hidden="true">#</a> 3.1 扁平数据解构转树状结构</h3><div class="language-js"><pre><code><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">&#39;部门1&#39;</span><span class="token punctuation">,</span> parentId<span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">&#39;部门2&#39;</span><span class="token punctuation">,</span> parentId<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">&#39;部门5&#39;</span><span class="token punctuation">,</span> parentId<span class="token operator">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">&#39;部门4&#39;</span><span class="token punctuation">,</span> parentId<span class="token operator">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">&#39;部门3&#39;</span><span class="token punctuation">,</span> parentId<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>&lt;&lt;&lt; @/js/objectIs.js</p><h2 id="_3-数据处理" tabindex="-1"><a class="header-anchor" href="#_3-数据处理" aria-hidden="true">#</a> 3. 数据处理</h2><h3 id="_3-1-扁平数据解构转树状结构" tabindex="-1"><a class="header-anchor" href="#_3-1-扁平数据解构转树状结构" aria-hidden="true">#</a> 3.1 扁平数据解构转树状结构</h3><div class="language-javascript ext-js line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&#39;部门1&#39;</span><span class="token punctuation">,</span> <span class="token literal-property property">parentId</span><span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&#39;部门2&#39;</span><span class="token punctuation">,</span> <span class="token literal-property property">parentId</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&#39;部门5&#39;</span><span class="token punctuation">,</span> <span class="token literal-property property">parentId</span><span class="token operator">:</span> <span class="token number">4</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&#39;部门4&#39;</span><span class="token punctuation">,</span> <span class="token literal-property property">parentId</span><span class="token operator">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&#39;部门3&#39;</span><span class="token punctuation">,</span> <span class="token literal-property property">parentId</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token comment">/**
+<span class="token doc-comment comment">/**
  * 结果
-    [{
+    [<span class="token punctuation">{</span>
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;部门1&quot;,
         &quot;parentId&quot;: 0,
-        &quot;children&quot;: [{
+        &quot;children&quot;: [<span class="token punctuation">{</span>
           &quot;id&quot;: 2,
           &quot;name&quot;: &quot;部门2&quot;,
           &quot;parentId&quot;: 1,
           &quot;children&quot;: []
-        }, {
+        <span class="token punctuation">}</span>, <span class="token punctuation">{</span>
           &quot;id&quot;: 3,
           &quot;name&quot;: &quot;部门3&quot;,
           &quot;parentId&quot;: 1,
-          &quot;children&quot;: [{
+          &quot;children&quot;: [<span class="token punctuation">{</span>
             &quot;id&quot;: 4,
             &quot;name&quot;: &quot;部门4&quot;,
             &quot;parentId&quot;: 3,
-            &quot;children&quot;: [{
+            &quot;children&quot;: [<span class="token punctuation">{</span>
               &quot;id&quot;: 5,
               &quot;name&quot;: &quot;部门5&quot;,
               &quot;parentId&quot;: 4,
               &quot;children&quot;: []
-            }]
-          }]
-        }]
-      }]
+            <span class="token punctuation">}</span>]
+          <span class="token punctuation">}</span>]
+        <span class="token punctuation">}</span>]
+      <span class="token punctuation">}</span>]
 */</span>
 
 <span class="token keyword">function</span> <span class="token function">arrayToTree</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -183,12 +77,12 @@ Event<span class="token punctuation">.</span><span class="token function">trigge
     <span class="token keyword">const</span> <span class="token punctuation">{</span> id<span class="token punctuation">,</span> parentId <span class="token punctuation">}</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>map<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
       map<span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-        children<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     map<span class="token punctuation">[</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span>item<span class="token punctuation">,</span>
-      children<span class="token operator">:</span> map<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>children
+      <span class="token literal-property property">children</span><span class="token operator">:</span> map<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">.</span>children
     <span class="token punctuation">}</span>
     <span class="token keyword">const</span> leaf <span class="token operator">=</span> map<span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token comment">// 这里假设初始id为0</span>
@@ -197,7 +91,7 @@ Event<span class="token punctuation">.</span><span class="token function">trigge
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>map<span class="token punctuation">[</span>parentId<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         map<span class="token punctuation">[</span>parentId<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-          children<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+          <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         <span class="token punctuation">}</span>
       <span class="token punctuation">}</span>
       map<span class="token punctuation">[</span>parentId<span class="token punctuation">]</span><span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>leaf<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -206,226 +100,7 @@ Event<span class="token punctuation">.</span><span class="token function">trigge
   <span class="token keyword">return</span> result<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token function">arrayToTree</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre></div><h2 id="_4-源码解析"><a class="header-anchor" href="#_4-源码解析" aria-hidden="true">#</a> 4. 源码解析</h2><h3 id="_4-1-react源码解析"><a class="header-anchor" href="#_4-1-react源码解析" aria-hidden="true">#</a> 4.1 React源码解析</h3><div class="language-md"><pre><code><span class="token list punctuation">-</span> Example-1
-
-<span class="token code"><span class="token punctuation">```</span><span class="token code-language">ts</span>
-<span class="token code-block language-ts"><span class="token keyword">const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
-<span class="token punctuation">```</span></span>
-
-上例中的<span class="token code keyword">`useState`</span>的初始化是在<span class="token code keyword">`packages/react-reconciler/src/ReactFiberHooks.new.js`</span>中：
-
-<span class="token code"><span class="token punctuation">```</span><span class="token code-language">ts</span>
-<span class="token code-block language-ts"><span class="token keyword">function</span> <span class="token generic-function"><span class="token function">mountState</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">S</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>
-  initialState<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token constant">S</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token constant">S</span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token constant">S</span><span class="token punctuation">,</span> Dispatch<span class="token operator">&lt;</span>BasicStateAction<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> hook <span class="token operator">=</span> <span class="token function">mountWorkInProgressHook</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">// useState传入的参数为函数，则执行该函数得出state，然后赋值给initialState</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> initialState <span class="token operator">===</span> <span class="token string">&#39;function&#39;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// $FlowFixMe: Flow doesn&#39;t like mixed types</span>
-    initialState <span class="token operator">=</span> <span class="token function">initialState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  hook<span class="token punctuation">.</span>memoizedState <span class="token operator">=</span> hook<span class="token punctuation">.</span>baseState <span class="token operator">=</span> initialState<span class="token punctuation">;</span>
-  <span class="token keyword">const</span> queue <span class="token operator">=</span> <span class="token punctuation">(</span>hook<span class="token punctuation">.</span>queue <span class="token operator">=</span> <span class="token punctuation">{</span>
-    pending<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    interleaved<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    lanes<span class="token operator">:</span> NoLanes<span class="token punctuation">,</span>
-    dispatch<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    lastRenderedReducer<span class="token operator">:</span> basicStateReducer<span class="token punctuation">,</span>
-    lastRenderedState<span class="token operator">:</span> <span class="token punctuation">(</span>initialState<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> dispatch<span class="token operator">:</span> Dispatch<span class="token operator">&lt;</span>
-    BasicStateAction<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  <span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token punctuation">.</span>dispatch <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">dispatchAction</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>
-    <span class="token keyword">null</span><span class="token punctuation">,</span>
-    currentlyRenderingFiber<span class="token punctuation">,</span>
-    queue<span class="token punctuation">,</span>
-  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">// Example-1中的setCount其实就是dispatchAction</span>
-  <span class="token keyword">return</span> <span class="token punctuation">[</span>hook<span class="token punctuation">.</span>memoizedState<span class="token punctuation">,</span> dispatch<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">function</span> <span class="token function">mountWorkInProgressHook</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Hook <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> hook<span class="token operator">:</span> Hook <span class="token operator">=</span> <span class="token punctuation">{</span>
-    memoizedState<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-
-    baseState<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    baseQueue<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// 最新的状态信息</span>
-    queue<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// 保持待更新的队列</span>
-
-    next<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// 指向下一个hook对象</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>workInProgressHook <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// This is the first hook in the list</span>
-    currentlyRenderingFiber<span class="token punctuation">.</span>memoizedState <span class="token operator">=</span> workInProgressHook <span class="token operator">=</span> hook<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Append to the end of the list</span>
-    workInProgressHook <span class="token operator">=</span> workInProgressHook<span class="token punctuation">.</span>next <span class="token operator">=</span> hook<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> workInProgressHook<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></span>
-<span class="token punctuation">```</span></span>
-
-
-
-<span class="token code"><span class="token punctuation">```</span><span class="token code-language">js</span>
-<span class="token code-block language-js"><span class="token keyword">function</span> dispatchAction<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
-  fiber<span class="token operator">:</span> Fiber<span class="token punctuation">,</span>
-  queue<span class="token operator">:</span> UpdateQueue<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  action<span class="token operator">:</span> <span class="token constant">A</span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 在开发环境下，如果&#39;setXXX&#39;第三个参数传入了一个回调，会有错误提示；</span>
-    <span class="token comment">// 如果想拿到更新的状态去做其他事情，可以通过第一个参数传入一个函数，拿到最新的状态，然后做其他事情；</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> arguments<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">&#39;function&#39;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>
-        <span class="token string">&quot;State updates from the useState() and useReducer() Hooks don&#39;t support the &quot;</span> <span class="token operator">+</span>
-          <span class="token string">&#39;second callback argument. To execute a side effect after &#39;</span> <span class="token operator">+</span>
-          <span class="token string">&#39;rendering, declare it in the component body with useEffect().&#39;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token keyword">const</span> eventTime <span class="token operator">=</span> <span class="token function">requestEventTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> lane <span class="token operator">=</span> <span class="token function">requestUpdateLane</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">const</span> update<span class="token operator">:</span> Update<span class="token operator">&lt;</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token constant">A</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-    lane<span class="token punctuation">,</span>
-    action<span class="token punctuation">,</span>
-    eagerReducer<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    eagerState<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
-    next<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token keyword">null</span><span class="token operator">:</span> any<span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">const</span> alternate <span class="token operator">=</span> fiber<span class="token punctuation">.</span>alternate<span class="token punctuation">;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>
-    fiber <span class="token operator">===</span> currentlyRenderingFiber <span class="token operator">||</span>
-    <span class="token punctuation">(</span>alternate <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> alternate <span class="token operator">===</span> currentlyRenderingFiber<span class="token punctuation">)</span>
-  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// This is a render phase update. Stash it in a lazily-created map of</span>
-    <span class="token comment">// queue -&gt; linked list of updates. After this render pass, we&#39;ll restart</span>
-    <span class="token comment">// and apply the stashed updates on top of the work-in-progress hook.</span>
-    didScheduleRenderPhaseUpdateDuringThisPass <span class="token operator">=</span> didScheduleRenderPhaseUpdate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> pending <span class="token operator">=</span> queue<span class="token punctuation">.</span>pending<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>pending <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// This is the first update. Create a circular list.</span>
-      update<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      update<span class="token punctuation">.</span>next <span class="token operator">=</span> pending<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-      pending<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    queue<span class="token punctuation">.</span>pending <span class="token operator">=</span> update<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isInterleavedUpdate</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> lane<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">const</span> interleaved <span class="token operator">=</span> queue<span class="token punctuation">.</span>interleaved<span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>interleaved <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// This is the first update. Create a circular list.</span>
-        update<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-        <span class="token comment">// At the end of the current render, this queue&#39;s interleaved updates will</span>
-        <span class="token comment">// be transfered to the pending queue.</span>
-        <span class="token function">pushInterleavedQueue</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        update<span class="token punctuation">.</span>next <span class="token operator">=</span> interleaved<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-        interleaved<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      queue<span class="token punctuation">.</span>interleaved <span class="token operator">=</span> update<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token keyword">const</span> pending <span class="token operator">=</span> queue<span class="token punctuation">.</span>pending<span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>pending <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment">// This is the first update. Create a circular list.</span>
-        update<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        update<span class="token punctuation">.</span>next <span class="token operator">=</span> pending<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-        pending<span class="token punctuation">.</span>next <span class="token operator">=</span> update<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-      queue<span class="token punctuation">.</span>pending <span class="token operator">=</span> update<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>
-      fiber<span class="token punctuation">.</span>lanes <span class="token operator">===</span> NoLanes <span class="token operator">&amp;&amp;</span>
-      <span class="token punctuation">(</span>alternate <span class="token operator">===</span> <span class="token keyword">null</span> <span class="token operator">||</span> alternate<span class="token punctuation">.</span>lanes <span class="token operator">===</span> NoLanes<span class="token punctuation">)</span>
-    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// The queue is currently empty, which means we can eagerly compute the</span>
-      <span class="token comment">// next state before entering the render phase. If the new state is the</span>
-      <span class="token comment">// same as the current state, we may be able to bail out entirely.</span>
-      <span class="token keyword">const</span> lastRenderedReducer <span class="token operator">=</span> queue<span class="token punctuation">.</span>lastRenderedReducer<span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>lastRenderedReducer <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">let</span> prevDispatcher<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          prevDispatcher <span class="token operator">=</span> ReactCurrentDispatcher<span class="token punctuation">.</span>current<span class="token punctuation">;</span>
-          ReactCurrentDispatcher<span class="token punctuation">.</span>current <span class="token operator">=</span> InvalidNestedHooksDispatcherOnUpdateInDEV<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-          <span class="token keyword">const</span> currentState<span class="token operator">:</span> <span class="token constant">S</span> <span class="token operator">=</span> <span class="token punctuation">(</span>queue<span class="token punctuation">.</span>lastRenderedState<span class="token operator">:</span> any<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">const</span> eagerState <span class="token operator">=</span> <span class="token function">lastRenderedReducer</span><span class="token punctuation">(</span>currentState<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token comment">// Stash the eagerly computed state, and the reducer used to compute</span>
-          <span class="token comment">// it, on the update object. If the reducer hasn&#39;t changed by the</span>
-          <span class="token comment">// time we enter the render phase, then the eager state can be used</span>
-          <span class="token comment">// without calling the reducer again.</span>
-          update<span class="token punctuation">.</span>eagerReducer <span class="token operator">=</span> lastRenderedReducer<span class="token punctuation">;</span>
-          update<span class="token punctuation">.</span>eagerState <span class="token operator">=</span> eagerState<span class="token punctuation">;</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is</span><span class="token punctuation">(</span>eagerState<span class="token punctuation">,</span> currentState<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token comment">// Fast path. We can bail out without scheduling React to re-render.</span>
-            <span class="token comment">// It&#39;s still possible that we&#39;ll need to rebase this update later,</span>
-            <span class="token comment">// if the component re-renders for a different reason and by that</span>
-            <span class="token comment">// time the reducer has changed.</span>
-            <span class="token keyword">return</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token comment">// Suppress the error. It will throw again in the render phase.</span>
-        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            ReactCurrentDispatcher<span class="token punctuation">.</span>current <span class="token operator">=</span> prevDispatcher<span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// $FlowExpectedError - jest isn&#39;t a global, and isn&#39;t recognized outside of tests</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">&#39;undefined&#39;</span> <span class="token operator">!==</span> <span class="token keyword">typeof</span> jest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">warnIfNotScopedWithMatchingAct</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">warnIfNotCurrentlyActingUpdatesInDev</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">const</span> root <span class="token operator">=</span> <span class="token function">scheduleUpdateOnFiber</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> lane<span class="token punctuation">,</span> eventTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isTransitionLane</span><span class="token punctuation">(</span>lane<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> root <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">let</span> queueLanes <span class="token operator">=</span> queue<span class="token punctuation">.</span>lanes<span class="token punctuation">;</span>
-
-      <span class="token comment">// If any entangled lanes are no longer pending on the root, then they</span>
-      <span class="token comment">// must have finished. We can remove them from the shared queue, which</span>
-      <span class="token comment">// represents a superset of the actually pending lanes. In some cases we</span>
-      <span class="token comment">// may entangle more than we need to, but that&#39;s OK. In fact it&#39;s worse if</span>
-      <span class="token comment">// we *don&#39;t* entangle when we should.</span>
-      queueLanes <span class="token operator">=</span> <span class="token function">intersectLanes</span><span class="token punctuation">(</span>queueLanes<span class="token punctuation">,</span> root<span class="token punctuation">.</span>pendingLanes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-      <span class="token comment">// Entangle the new transition lane with the other transition lanes.</span>
-      <span class="token keyword">const</span> newQueueLanes <span class="token operator">=</span> <span class="token function">mergeLanes</span><span class="token punctuation">(</span>queueLanes<span class="token punctuation">,</span> lane<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      queue<span class="token punctuation">.</span>lanes <span class="token operator">=</span> newQueueLanes<span class="token punctuation">;</span>
-      <span class="token comment">// Even if queue.lanes already include lane, we don&#39;t know for certain if</span>
-      <span class="token comment">// the lane finished since the last time we entangled it. So we need to</span>
-      <span class="token comment">// entangle it again, just to be sure.</span>
-      <span class="token function">markRootEntangled</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> newQueueLanes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>__DEV__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>enableDebugTracing<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>fiber<span class="token punctuation">.</span>mode <span class="token operator">&amp;</span> DebugTracingMode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token function">getComponentNameFromFiber</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token string">&#39;Unknown&#39;</span><span class="token punctuation">;</span>
-        <span class="token function">logStateUpdateScheduled</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> lane<span class="token punctuation">,</span> action<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>enableSchedulingProfiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">markStateUpdateScheduled</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> lane<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></span>
-<span class="token punctuation">```</span></span>
-
-</code></pre></div></div></div><footer class="page-footer" data-v-d36a7fda data-v-5a019cc9><div class="edit" data-v-5a019cc9><div class="edit-link" data-v-5a019cc9 data-v-3ae295f1><a class="link" href="https://github.com/ivan0525/fe-notes/edit/main/docs/js/index.md" target="_blank" rel="noopener noreferrer" data-v-3ae295f1>愿意帮助我？ <svg class="icon outbound icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15" data-v-3ae295f1><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div><div class="updated" data-v-5a019cc9><p class="last-updated" data-v-5a019cc9 data-v-52854a16><span class="prefix" data-v-52854a16>上次更新:</span><span class="datetime" data-v-52854a16></span></p></div></footer><!----><!--[--><!--]--></div></main></div><!----><!--]--></div>
-    <script>__VP_HASH_MAP__ = JSON.parse("{\"index.md\":\"97fec9ee\",\"algorithm_index.md\":\"1aa835f5\",\"basic_index.md\":\"e61b80df\",\"js_index.md\":\"de466f0b\",\"js_react-source-code.md\":\"7077e078\",\"others_index.md\":\"e14425f6\",\"webpack_index.md\":\"e3ec20e8\",\"basic_browser_index.md\":\"2553b431\",\"basic_css_index.md\":\"e8a3336b\",\"basic_html_index.md\":\"02149e4f\",\"basic_network_index.md\":\"61fb0e50\"}")</script>
-    <script type="module" async src="/fe-notes/assets/app.a2fcf4d3.js"></script>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br></div></div><h2 id="_4-源码解析" tabindex="-1"><a class="header-anchor" href="#_4-源码解析" aria-hidden="true">#</a> 4. 源码解析</h2><h3 id="_4-1-react源码解析" tabindex="-1"><a class="header-anchor" href="#_4-1-react源码解析" aria-hidden="true">#</a> 4.1 React源码解析</h3><p>&lt;&lt;&lt; @/js/react-source-code.md</p><!--]--></div><footer class="page-meta"><div class="meta-item edit-link"><a class="external-link meta-item-label" href="https://github.com/ivan0525/fe-notes/edit/main/docs/js/index.md" rel="noopener noreferrer" target="_blank" aria-label="愿意帮助我？"><!--[--><!--]--> 愿意帮助我？ <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="meta-item last-updated"><span class="meta-item-label">上次更新: </span><!----></div><div class="meta-item contributors"><span class="meta-item-label">贡献者: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: zhuangyufeng189@gmail.com">ivan0525</span><!----><!--]--><!--]--></span></div></footer><!----><!--[--><!--]--></main><!--]--></div><!----><!--]--></div>
+    <script type="module" src="/fe-notes/assets/app.b8de8cc4.js" defer></script>
   </body>
 </html>
