@@ -1,0 +1,15 @@
+$brand-color: #ddacf5;
+:root {
+  --c-brand: #ddacf5;
+  --c-brand-light: #e1b5f6;
+}
+.nav-bar-title {
+  .logo {
+    vertical-align: text-bottom;
+  }
+}
+
+blockquote {
+  border-left: 0.2rem solid lighten(#ddacf5, 2%);
+  background: lighten(#ddacf5, 17%);
+}

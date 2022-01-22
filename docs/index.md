@@ -4,8 +4,10 @@ heroImage: /logo.png
 heroAlt: Logo image
 heroText: FE-Notes
 tagline: 前端学习、踩坑笔记
-actionText: 👉 开始学习
-actionLink: /basic/
+actions:
+  - text: 👉 开始学习
+    link: /basic/
+    type: primary
 features:
   - title: 持续学习
     details: 今天不学习，明天变垃圾
