@@ -1,0 +1,1 @@
+const a={key:"v-7664c5fa",path:"/basic/",title:"\u57FA\u7840\u90E8\u5206",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1642917474e3,contributors:[{name:"ivan0525",email:"zhuangyufeng189@gmail.com",commits:1}]},filePathRelative:"basic/index.md"};export{a as data};

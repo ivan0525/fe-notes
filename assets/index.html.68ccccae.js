@@ -1,0 +1,1 @@
+const e={key:"v-5d8a6601",path:"/basic/browser/",title:"\u6D4F\u89C8\u5668\u76F8\u5173",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1642917474e3,contributors:[{name:"ivan0525",email:"zhuangyufeng189@gmail.com",commits:1}]},filePathRelative:"basic/browser/index.md"};export{e as data};
