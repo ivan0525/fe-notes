@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="VuePress 2.0.0-beta.34">
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+      html.dark {
+        --c-bg: #22272e;
+      }
+      html, body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme');
+			const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
+				document.documentElement.classList.toggle('dark', true);
+			}
+    </script>
+    <link rel="icon" href="/fe-notes/logo.png" type="image/png"><meta name="author" content="Ivan0525"><title>Elasticsearch 管理模块设计方案 | 前端笔记</title><meta name="description" content="前端开发学习、踩坑笔记">
+    <link rel="modulepreload" href="/fe-notes/assets/app.db9de137.js"><link rel="modulepreload" href="/fe-notes/assets/elasticsearch-management-design.html.81fac91e.js"><link rel="modulepreload" href="/fe-notes/assets/plugin-vue_export-helper.21dcd24c.js"><link rel="modulepreload" href="/fe-notes/assets/elasticsearch-management-design.html.af6f4d97.js">
+    <link rel="stylesheet" href="/fe-notes/assets/style.e82a5799.css">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="theme-container"><!--[--><header ref_key="navbar" class="navbar"><div class="toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a href="/fe-notes/" class=""><img class="logo" src="/fe-notes/logo.png" alt="前端笔记"><span class="site-name can-hide">前端笔记</span></a></span><div class="navbar-items-wrapper" style=""><!--[--><!--]--><nav class="navbar-items can-hide"><!--[--><div class="navbar-item"><a href="/fe-notes/basic/" class="" aria-label="基础"><!--[--><!--]--> 基础 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/js/" class="" aria-label="js"><!--[--><!--]--> js <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/webpack/" class="" aria-label="webpack"><!--[--><!--]--> webpack <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/algorithm/" class="" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/others/" class="router-link-active" aria-label="其他"><!--[--><!--]--> 其他 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/ivan0525/fe-notes" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button class="toggle-dark-button" title="toggle dark mode"><svg style="" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg style="display:none;" class="icon" focusable="false" viewBox="0 0 32 32"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="sidebar-mask"></div><!--[--><aside class="sidebar"><nav class="navbar-items"><!--[--><div class="navbar-item"><a href="/fe-notes/basic/" class="" aria-label="基础"><!--[--><!--]--> 基础 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/js/" class="" aria-label="js"><!--[--><!--]--> js <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/webpack/" class="" aria-label="webpack"><!--[--><!--]--> webpack <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/algorithm/" class="" aria-label="算法"><!--[--><!--]--> 算法 <!--[--><!--]--></a></div><div class="navbar-item"><a href="/fe-notes/others/" class="router-link-active" aria-label="其他"><!--[--><!--]--> 其他 <!--[--><!--]--></a></div><div class="navbar-item"><a class="external-link" href="https://github.com/ivan0525/fe-notes" rel="noopener noreferrer" target="_blank" aria-label="GitHub"><!--[--><!--]--> GitHub <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="sidebar-items"><!--[--><li><a href="/fe-notes/others/" class="router-link-active sidebar-item sidebar-heading" aria-label="随笔"><!--[--><!--]--> 随笔 <!--[--><!--]--></a><!----></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="page"><!--[--><!--]--><div class="theme-default-content"><!--[--><h1 id="elasticsearch-管理模块设计方案" tabindex="-1"><a class="header-anchor" href="#elasticsearch-管理模块设计方案" aria-hidden="true">#</a> Elasticsearch 管理模块设计方案</h1><blockquote><p>嵌入运维系统的 ES 管理模块，面向业务方用户，通过后端代理对接 ES 官方 API。</p></blockquote><hr><h2 id="_1-设计背景与目标" tabindex="-1"><a class="header-anchor" href="#_1-设计背景与目标" aria-hidden="true">#</a> 1. 设计背景与目标</h2><h3 id="_1-1-背景" tabindex="-1"><a class="header-anchor" href="#_1-1-背景" aria-hidden="true">#</a> 1.1 背景</h3><p>团队已部署官方 Elasticsearch 服务，业务方在日常工作中需要查看集群状态、管理索引、查询数据，但当前缺少统一的可视化管理入口。Kibana 虽提供相关能力，但 UX 对业务方过于复杂，且无法融入现有运维系统的统一体验。</p><h3 id="_1-2-目标" tabindex="-1"><a class="header-anchor" href="#_1-2-目标" aria-hidden="true">#</a> 1.2 目标</h3><p>在现有运维系统中新增 ES 管理模块，提供以下核心能力：</p><table><thead><tr><th>能力</th><th>说明</th></tr></thead><tbody><tr><td>集群监控</td><td>集群健康概览 + 节点级基础指标</td></tr><tr><td>索引管理</td><td>索引的创建、删除、mapping 查看与编辑</td></tr><tr><td>查询工具</td><td>可视化查询构建器 + DSL 编辑器 + 查询模板</td></tr></tbody></table><h3 id="_1-3-设计原则" tabindex="-1"><a class="header-anchor" href="#_1-3-设计原则" aria-hidden="true">#</a> 1.3 设计原则</h3><ul><li><strong>业务友好</strong>：目标用户非技术深度用户，所有交互应降低 ES 概念门槛</li><li><strong>安全优先</strong>：所有请求经后端代理，不暴露 ES 端口，操作可审计</li><li><strong>渐进增强</strong>：可视化查询为主、DSL 为辅，新手和高级用户各取所需</li><li><strong>统一体验</strong>：使用运维系统自研前端框架，保持 UI/UX 一致性</li></ul><hr><h2 id="_2-整体架构" tabindex="-1"><a class="header-anchor" href="#_2-整体架构" aria-hidden="true">#</a> 2. 整体架构</h2><h3 id="_2-1-架构选型决策-后端代理模式" tabindex="-1"><a class="header-anchor" href="#_2-1-架构选型决策-后端代理模式" aria-hidden="true">#</a> 2.1 架构选型决策：后端代理模式</h3><p><strong>决策：采用后端代理模式，前端不直连 ES。</strong></p><p>理由：</p><ul><li>前端直连 ES 等于将集群 root 权限暴露给浏览器，业务方可通过 DevTools 发任意请求</li><li>后端代理可实现：操作审计、请求校验（拦截危险操作）、结果大小裁剪、查询超时控制</li><li>与运维系统现有后端架构保持一致</li></ul><h3 id="_2-2-架构拓扑" tabindex="-1"><a class="header-anchor" href="#_2-2-架构拓扑" aria-hidden="true">#</a> 2.2 架构拓扑</h3><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─────────────────────────────────────────────────────┐
+│                   运维系统前端                        │
+│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
+│  │ 集群监控  │  │ 索引管理  │  │    查询工具       │   │
+│  │ Dashboard │  │  CRUD    │  │ 构建器/DSL/模板  │   │
+│  └────┬─────┘  └────┬─────┘  └───────┬──────────┘   │
+│       │              │                │              │
+│       └──────────────┼────────────────┘              │
+│                      │ HTTP (RESTful API)            │
+└──────────────────────┼──────────────────────────────┘
+                       │
+┌──────────────────────┼──────────────────────────────┐
+│              运维系统后端 (ES Proxy Layer)            │
+│  ┌───────────────────┼─────────────────────────┐    │
+│  │    ES API Gateway                           │    │
+│  │  ┌─────────┐ ┌──────────┐ ┌─────────────┐  │    │
+│  │  │请求校验  │ │ 操作审计  │ │ 结果裁剪    │  │    │
+│  │  │&amp; 限流   │ │ &amp; 日志   │ │ &amp; 超时控制  │  │    │
+│  │  └────┬────┘ └─────┬────┘ └──────┬──────┘  │    │
+│  │       └────────────┼─────────────┘          │    │
+│  └────────────────────┼────────────────────────┘    │
+│                       │                              │
+│                       │ ES REST API (9200)           │
+└───────────────────────┼─────────────────────────────┘
+                        │
+            ┌───────────┴──────────┐
+            │   Elasticsearch      │
+            │   Cluster            │
+            │  ┌─────┐  ┌─────┐   │
+            │  │Node1 │  │Node2 │  │
+            │  └─────┘  └─────┘   │
+            │  ┌─────┐  ┌─────┐   │
+            │  │Node3 │  │NodeN │  │
+            │  └─────┘  └─────┘   │
+            └──────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br></div></div><h3 id="_2-3-后端代理层职责" tabindex="-1"><a class="header-anchor" href="#_2-3-后端代理层职责" aria-hidden="true">#</a> 2.3 后端代理层职责</h3><table><thead><tr><th>职责</th><th>说明</th></tr></thead><tbody><tr><td>请求校验</td><td>拦截危险操作（如 <code>_delete_by_query</code> 无条件删除），限制 <code>size</code> 上限</td></tr><tr><td>操作审计</td><td>记录所有写操作（创建/删除索引、修改 mapping）到审计日志</td></tr><tr><td>结果裁剪</td><td>查询结果超过阈值时截断，防止大结果集撑爆前端内存</td></tr><tr><td>超时控制</td><td>所有转发到 ES 的请求设置统一超时（建议 30s），防止慢查询阻塞</td></tr><tr><td>限流</td><td>每用户/每分钟的请求频率限制，防止误操作连续刷请求</td></tr></tbody></table><hr><h2 id="_3-功能模块详细设计" tabindex="-1"><a class="header-anchor" href="#_3-功能模块详细设计" aria-hidden="true">#</a> 3. 功能模块详细设计</h2><h3 id="_3-1-集群监控" tabindex="-1"><a class="header-anchor" href="#_3-1-集群监控" aria-hidden="true">#</a> 3.1 集群监控</h3><h4 id="_3-1-1-监控粒度决策" tabindex="-1"><a class="header-anchor" href="#_3-1-1-监控粒度决策" aria-hidden="true">#</a> 3.1.1 监控粒度决策</h4><p><strong>决策：采用&quot;中等偏轻&quot;方案——集群概览 + 节点级基础指标，不下沉到 segment/thread pool 级别。</strong></p><p>理由：</p><ul><li>业务方关心的是&quot;ES 是否可用&quot;和&quot;资源是否充足&quot;，不需要运维级别的调优指标</li><li>segment、thread pool、circuit breaker 等属于运维/SRE 的关注点</li><li>保持界面简洁，避免信息过载</li></ul><h4 id="_3-1-2-集群概览卡片" tabindex="-1"><a class="header-anchor" href="#_3-1-2-集群概览卡片" aria-hidden="true">#</a> 3.1.2 集群概览卡片</h4><p>调用 ES API：<code>GET _cluster/health</code> + <code>GET _cluster/stats</code></p><table><thead><tr><th>指标</th><th>数据来源</th><th>展示形式</th></tr></thead><tbody><tr><td>集群健康状态</td><td><code>_cluster/health → status</code></td><td>信号灯（绿/黄/红）+ 文字说明</td></tr><tr><td>节点数</td><td><code>_cluster/health → number_of_nodes</code></td><td>数字</td></tr><tr><td>索引数</td><td><code>_cluster/health → active_primary_shards</code> 推导</td><td>数字</td></tr><tr><td>总文档数</td><td><code>_cluster/stats → indices.docs.count</code></td><td>格式化数字（如 12.5M）</td></tr><tr><td>总存储用量</td><td><code>_cluster/stats → indices.store.size_in_bytes</code></td><td>格式化（如 256.3 GB）</td></tr><tr><td>可用磁盘空间</td><td><code>_nodes/stats/fs</code></td><td>进度条（已用/总量）</td></tr></tbody></table><p><strong>健康状态说明规则：</strong></p><table><thead><tr><th>状态</th><th>含义</th><th>前端展示</th></tr></thead><tbody><tr><td>Green</td><td>所有主分片和副本分片正常</td><td>🟢 健康</td></tr><tr><td>Yellow</td><td>所有主分片正常，部分副本分片未分配</td><td>🟡 警告 — 副本不完整</td></tr><tr><td>Red</td><td>部分主分片不可用</td><td>🔴 异常 — 数据可能不可用</td></tr></tbody></table><h4 id="_3-1-3-节点列表" tabindex="-1"><a class="header-anchor" href="#_3-1-3-节点列表" aria-hidden="true">#</a> 3.1.3 节点列表</h4><p>调用 ES API：<code>GET _nodes/stats</code></p><table><thead><tr><th>列</th><th>数据来源</th><th>说明</th></tr></thead><tbody><tr><td>节点名称</td><td><code>nodes.{id}.name</code></td><td>—</td></tr><tr><td>IP 地址</td><td><code>nodes.{id}.transport_address</code></td><td>—</td></tr><tr><td>角色</td><td><code>nodes.{id}.roles</code></td><td>master / data / ingest 等</td></tr><tr><td>CPU 使用率</td><td><code>nodes.{id}.os.cpu.percent</code></td><td>百分比 + 迷你进度条</td></tr><tr><td>JVM 堆内存</td><td><code>nodes.{id}.jvm.mem.heap_used_percent</code></td><td>百分比 + 迷你进度条</td></tr><tr><td>磁盘使用率</td><td><code>nodes.{id}.fs.total</code></td><td>已用/总量</td></tr><tr><td>文档数</td><td><code>nodes.{id}.indices.docs.count</code></td><td>该节点上的文档数</td></tr><tr><td>分片数</td><td><code>_cat/allocation</code> 关联</td><td>该节点承载的分片数</td></tr></tbody></table><h4 id="_3-1-4-分片分配概览" tabindex="-1"><a class="header-anchor" href="#_3-1-4-分片分配概览" aria-hidden="true">#</a> 3.1.4 分片分配概览</h4><p>调用 ES API：<code>GET _cat/shards?format=json</code></p><p>以表格形式展示，按索引分组：</p><table><thead><tr><th>列</th><th>说明</th></tr></thead><tbody><tr><td>索引名</td><td>分组标题</td></tr><tr><td>分片编号</td><td>0, 1, 2, ...</td></tr><tr><td>类型</td><td>Primary / Replica</td></tr><tr><td>状态</td><td>STARTED / UNASSIGNED / RELOCATING / INITIALIZING</td></tr><tr><td>节点</td><td>分片所在节点名</td></tr><tr><td>文档数</td><td>该分片的文档数</td></tr><tr><td>大小</td><td>该分片的存储大小</td></tr></tbody></table><p><strong>交互：</strong></p><ul><li>默认折叠，点击索引名展开查看分片详情</li><li>UNASSIGNED 分片高亮红色标记</li><li>支持按状态筛选（只看异常分片）</li></ul><h4 id="_3-1-5-数据刷新策略" tabindex="-1"><a class="header-anchor" href="#_3-1-5-数据刷新策略" aria-hidden="true">#</a> 3.1.5 数据刷新策略</h4><table><thead><tr><th>策略</th><th>说明</th></tr></thead><tbody><tr><td>手动刷新</td><td>页面提供&quot;刷新&quot;按钮，点击立即拉取最新数据</td></tr><tr><td>自动轮询</td><td>默认 30 秒轮询一次，可配置（15s / 30s / 60s / 关闭）</td></tr><tr><td>首次加载</td><td>进入页面时自动拉取</td></tr></tbody></table><hr><h3 id="_3-2-索引管理" tabindex="-1"><a class="header-anchor" href="#_3-2-索引管理" aria-hidden="true">#</a> 3.2 索引管理</h3><h4 id="_3-2-1-索引列表页" tabindex="-1"><a class="header-anchor" href="#_3-2-1-索引列表页" aria-hidden="true">#</a> 3.2.1 索引列表页</h4><p>调用 ES API：<code>GET _cat/indices?format=json&amp;h=index,health,status,pri,rep,docs.count,store.size,creation.date.string</code></p><table><thead><tr><th>列</th><th>说明</th></tr></thead><tbody><tr><td>索引名</td><td>支持搜索过滤</td></tr><tr><td>健康状态</td><td>green/yellow/red 信号灯</td></tr><tr><td>状态</td><td>open / close</td></tr><tr><td>主分片数</td><td>—</td></tr><tr><td>副本数</td><td>—</td></tr><tr><td>文档数</td><td>格式化显示</td></tr><tr><td>存储大小</td><td>格式化显示</td></tr><tr><td>创建时间</td><td>—</td></tr><tr><td>操作</td><td>查看 mapping / 删除</td></tr></tbody></table><p><strong>交互：</strong></p><ul><li>顶部搜索栏：支持按索引名模糊搜索</li><li>支持按健康状态、索引状态筛选</li><li>隐藏系统索引（以 <code>.</code> 开头的索引）默认不显示，可切换显示</li><li>分页加载（每页 20 条）</li></ul><h4 id="_3-2-2-创建索引" tabindex="-1"><a class="header-anchor" href="#_3-2-2-创建索引" aria-hidden="true">#</a> 3.2.2 创建索引</h4><p>调用 ES API：<code>PUT /{index_name}</code></p><p><strong>决策：采用表单化创建 + JSON 高级模式双轨方案。</strong></p><p><strong>表单模式（推荐业务方使用）：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─ 创建索引 ──────────────────────────────────────┐
+│                                                  │
+│  索引名称:  [__________________________]         │
+│             · 仅支持小写字母、数字、-、_          │
+│             · 不能以 -、_、. 开头                 │
+│                                                  │
+│  主分片数:  [1    ▼]  (默认 1，建议 1-5)         │
+│  副本数:    [1    ▼]  (默认 1)                   │
+│                                                  │
+│  ── Mapping 字段定义 ──                          │
+│  ┌──────────┬──────────┬───────────┬────┐        │
+│  │ 字段名    │ 字段类型  │ 分词器     │ 操作│       │
+│  ├──────────┼──────────┼───────────┼────┤        │
+│  │ title    │ text   ▼ │ standard▼ │ 🗑 │        │
+│  │ status   │ keyword▼ │    —      │ 🗑 │        │
+│  │ count    │ integer▼ │    —      │ 🗑 │        │
+│  │ created  │ date   ▼ │    —      │ 🗑 │        │
+│  └──────────┴──────────┴───────────┴────┘        │
+│  [+ 添加字段]                                     │
+│                                                  │
+│  支持的字段类型:                                   │
+│  text / keyword / integer / long / float /       │
+│  double / boolean / date / object / nested       │
+│                                                  │
+│  分词器选项 (仅 text 类型):                        │
+│  standard / ik_max_word / ik_smart / whitespace   │
+│                                                  │
+│              [取消]  [预览 JSON]  [创建]           │
+└──────────────────────────────────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p><strong>JSON 高级模式：</strong></p><ul><li>提供一个 JSON 编辑器，允许直接编写完整的 <code>settings</code> + <code>mappings</code> JSON</li><li>带语法校验（JSON 合法性 + ES mapping 基本规则校验）</li><li>表单模式切换到 JSON 模式时自动生成对应 JSON，方便学习</li></ul><p><strong>创建前校验规则：</strong></p><table><thead><tr><th>规则</th><th>说明</th></tr></thead><tbody><tr><td>索引名格式</td><td>仅允许小写字母、数字、<code>-</code>、<code>_</code>，不能以 <code>-</code>、<code>_</code>、<code>.</code> 开头</td></tr><tr><td>索引名重复</td><td>提交前检查索引是否已存在</td></tr><tr><td>字段名唯一</td><td>mapping 中不允许重复字段名</td></tr><tr><td>主分片数范围</td><td>1-10，超出提示风险</td></tr></tbody></table><h4 id="_3-2-3-删除索引" tabindex="-1"><a class="header-anchor" href="#_3-2-3-删除索引" aria-hidden="true">#</a> 3.2.3 删除索引</h4><p>调用 ES API：<code>DELETE /{index_name}</code></p><p><strong>决策：二次确认 + 输入索引名确认，无回收站。</strong></p><p>理由：</p><ul><li>回收站机制需要额外的快照/备份基础设施，复杂度过高</li><li>采用&quot;输入索引名确认&quot;的方式（类似 GitHub 删除仓库）已足够防止误操作</li></ul><p><strong>交互流程：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>1. 点击&quot;删除&quot;按钮
+2. 弹出确认对话框：
+   ┌─ 删除索引 ──────────────────────────────┐
+   │                                          │
+   │  ⚠️ 此操作不可恢复！                      │
+   │                                          │
+   │  即将删除索引: my-index                   │
+   │  包含 125,000 条文档，占用 2.3 GB          │
+   │                                          │
+   │  请输入索引名称以确认删除:                  │
+   │  [__________________________]             │
+   │                                          │
+   │              [取消]  [确认删除]            │
+   └──────────────────────────────────────────┘
+3. 输入的索引名必须完全匹配才能点击&quot;确认删除&quot;
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h4 id="_3-2-4-mapping-查看与管理" tabindex="-1"><a class="header-anchor" href="#_3-2-4-mapping-查看与管理" aria-hidden="true">#</a> 3.2.4 Mapping 查看与管理</h4><p>调用 ES API：<code>GET /{index_name}/_mapping</code></p><p><strong>Mapping 查看页：</strong></p><p>以树形结构展示 mapping，每个字段显示：</p><ul><li>字段名</li><li>字段类型（带类型图标/标签）</li><li>分词器（如适用）</li><li>是否可搜索（<code>index: true/false</code>）</li><li>子字段（<code>fields</code> / <code>properties</code>）</li></ul><p><strong>Mapping 修改：</strong></p><p>ES 的 mapping 一旦创建，已有字段的类型不可修改，只能新增字段。UI 需要明确传达这个限制：</p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─ Mapping 管理 ─ my-index ──────────────────┐
+│                                              │
+│  现有字段 (不可修改类型):                      │
+│  ├── title      text (ik_max_word)    🔒     │
+│  ├── status     keyword               🔒     │
+│  ├── count      integer               🔒     │
+│  └── created    date                  🔒     │
+│                                              │
+│  ── 新增字段 ──                               │
+│  ┌──────────┬──────────┬───────────┬────┐    │
+│  │ 字段名    │ 字段类型  │ 分词器     │ 操作│   │
+│  ├──────────┼──────────┼───────────┼────┤    │
+│  │ [      ] │ [    ▼]  │ [     ▼]  │ 🗑  │   │
+│  └──────────┴──────────┴───────────┴────┘    │
+│  [+ 添加字段]                                 │
+│                                              │
+│  ⓘ ES 的 mapping 已有字段类型不可修改，        │
+│    如需修改请创建新索引并迁移数据。              │
+│                                              │
+│                    [取消]  [提交新增字段]       │
+└──────────────────────────────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>调用 ES API：<code>PUT /{index_name}/_mapping</code>（仅新增字段）</p><hr><h3 id="_3-3-查询工具" tabindex="-1"><a class="header-anchor" href="#_3-3-查询工具" aria-hidden="true">#</a> 3.3 查询工具</h3><h4 id="_3-3-1-整体布局" tabindex="-1"><a class="header-anchor" href="#_3-3-1-整体布局" aria-hidden="true">#</a> 3.3.1 整体布局</h4><p><strong>决策：三种查询模式并存，Tab 切换，优先展示可视化构建器。</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─ 查询工具 ──────────────────────────────────────────────────┐
+│                                                              │
+│  索引选择: [my-index          ▼]  (支持搜索的下拉框)          │
+│                                                              │
+│  ┌─────────────┬─────────────┬─────────────┐                │
+│  │ 可视化构建器  │  DSL 编辑器  │  查询模板    │                │
+│  └─────────────┴─────────────┴─────────────┘                │
+│                                                              │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │                                                      │   │
+│  │              (查询输入区 - 根据 Tab 切换)              │   │
+│  │                                                      │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│  [查询]  [重置]  [保存为模板]            返回数量上限: [200▼]  │
+│                                                              │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │                                                      │   │
+│  │              (查询结果区)                              │   │
+│  │                                                      │   │
+│  └──────────────────────────────────────────────────────┘   │
+└──────────────────────────────────────────────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h4 id="_3-3-2-可视化查询构建器" tabindex="-1"><a class="header-anchor" href="#_3-3-2-可视化查询构建器" aria-hidden="true">#</a> 3.3.2 可视化查询构建器</h4><p>面向不熟悉 DSL 的业务方，通过表单交互自动生成查询。</p><p><strong>筛选条件区：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─ 筛选条件 ────────────────────────────────────────────┐
+│                                                        │
+│  条件组合: (AND ▼)                                     │
+│                                                        │
+│  ┌──────────┬──────────┬──────────────────┬────┐      │
+│  │ 字段      │ 操作符    │ 值               │ 操作│     │
+│  ├──────────┼──────────┼──────────────────┼────┤      │
+│  │ title  ▼ │ 包含   ▼  │ [搜索关键词     ] │ 🗑  │     │
+│  │ status ▼ │ 等于   ▼  │ [active         ] │ 🗑  │     │
+│  │ created▼ │ 范围   ▼  │ [起] ～ [止]      │ 🗑  │     │
+│  └──────────┴──────────┴──────────────────┴────┘      │
+│  [+ 添加条件]                                          │
+│                                                        │
+│  ── 排序 ──                                            │
+│  字段: [created ▼]  方向: [降序 ▼]                      │
+│                                                        │
+│  ── 返回字段 ──                                         │
+│  [✓] 全部字段  [ ] 自定义: [title, status, created]      │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><strong>操作符映射到 DSL：</strong></p><table><thead><tr><th>字段类型</th><th>可用操作符</th><th>对应 DSL</th></tr></thead><tbody><tr><td>text</td><td>包含 / 不包含</td><td><code>match</code> / <code>must_not</code> + <code>match</code></td></tr><tr><td>keyword</td><td>等于 / 不等于 / 包含于</td><td><code>term</code> / <code>must_not</code> + <code>term</code> / <code>terms</code></td></tr><tr><td>integer/long/float/double</td><td>等于 / 大于 / 小于 / 范围</td><td><code>term</code> / <code>range</code></td></tr><tr><td>date</td><td>等于 / 早于 / 晚于 / 范围</td><td><code>range</code></td></tr><tr><td>boolean</td><td>是 / 否</td><td><code>term</code></td></tr></tbody></table><p><strong>聚合配置（可选展开区）：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>┌─ 聚合统计 (可选) ─────────────────────────────────┐
+│                                                    │
+│  ┌──────────┬──────────────┬────────────┬────┐    │
+│  │ 聚合类型   │ 字段          │ 参数        │ 操作│   │
+│  ├──────────┼──────────────┼────────────┼────┤    │
+│  │ 分组统计▼ │ status     ▼ │ Top [10 ]  │ 🗑  │   │
+│  │ 平均值 ▼  │ count      ▼ │    —       │ 🗑  │   │
+│  │ 日期直方图▼│ created    ▼ │ 间隔 [1d▼] │ 🗑  │   │
+│  └──────────┴──────────────┴────────────┴────┘    │
+│  [+ 添加聚合]                                      │
+│                                                    │
+│  支持的聚合类型:                                     │
+│  分组统计(terms) / 计数(value_count) /               │
+│  平均值(avg) / 求和(sum) / 最大值(max) /             │
+│  最小值(min) / 日期直方图(date_histogram)             │
+│                                                    │
+└────────────────────────────────────────────────────┘
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p><strong>&quot;查看生成的 DSL&quot;按钮：</strong></p><p>构建器根据用户配置实时生成 DSL，点击可查看、复制、切换到 DSL 编辑器继续编辑。这对业务方学习 DSL 非常有帮助。</p><h4 id="_3-3-3-dsl-编辑器" tabindex="-1"><a class="header-anchor" href="#_3-3-3-dsl-编辑器" aria-hidden="true">#</a> 3.3.3 DSL 编辑器</h4><p>面向有一定技术背景的用户，提供原始 DSL 编写能力。</p><p><strong>编辑器功能要求：</strong></p><table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td>语法高亮</td><td>JSON 语法着色</td></tr><tr><td>自动补全</td><td>ES 关键字补全（<code>match</code>、<code>term</code>、<code>range</code>、<code>bool</code> 等）</td></tr><tr><td>JSON 校验</td><td>实时检测 JSON 格式错误，标红提示</td></tr><tr><td>格式化</td><td>一键美化/压缩 JSON</td></tr><tr><td>折叠</td><td>支持代码块折叠</td></tr><tr><td>历史记录</td><td>最近 20 条查询历史，可快速回填</td></tr></tbody></table><p><strong>推荐实现：</strong> 集成 Monaco Editor（VS Code 同款编辑器引擎），配置 JSON language server，自定义 ES DSL 的自动补全 provider。</p><p><strong>安全限制（后端代理层实现）：</strong></p><table><thead><tr><th>限制</th><th>规则</th></tr></thead><tbody><tr><td><code>size</code> 上限</td><td>最大 500，超过自动截断为 500 并提示</td></tr><tr><td>超时</td><td>查询超过 30s 自动取消</td></tr><tr><td>禁止操作</td><td>拦截 <code>_delete_by_query</code>、<code>_update_by_query</code>（不通过查询工具暴露写操作）</td></tr><tr><td>仅允许 <code>_search</code></td><td>查询工具仅转发 <code>GET /{index}/_search</code> 请求</td></tr></tbody></table><h4 id="_3-3-4-查询模板" tabindex="-1"><a class="header-anchor" href="#_3-3-4-查询模板" aria-hidden="true">#</a> 3.3.4 查询模板</h4><p>预置常用查询模板，用户填入参数即可执行，降低上手门槛。</p><p><strong>内置模板：</strong></p><table><thead><tr><th>模板名称</th><th>说明</th><th>参数</th></tr></thead><tbody><tr><td>全文搜索</td><td>在指定字段中搜索关键词</td><td>字段、关键词</td></tr><tr><td>精确匹配</td><td>按 keyword 字段精确查找</td><td>字段、值</td></tr><tr><td>时间范围查询</td><td>按时间字段筛选指定范围的数据</td><td>时间字段、起止时间</td></tr><tr><td>多条件组合查询</td><td>AND/OR 组合多个条件</td><td>条件列表</td></tr><tr><td>TopN 聚合</td><td>统计某字段出现次数最多的 N 项</td><td>字段、N</td></tr><tr><td>日期趋势统计</td><td>按天/小时统计文档数量趋势</td><td>时间字段、时间间隔</td></tr></tbody></table><p><strong>自定义模板：</strong></p><ul><li>用户可将任意查询&quot;保存为模板&quot;</li><li>模板包括：名称、描述、DSL 内容（参数用 <code></code> 标记）</li><li>模板存储在运维系统后端数据库，可在团队内共享</li></ul><h4 id="_3-3-5-查询结果展示" tabindex="-1"><a class="header-anchor" href="#_3-3-5-查询结果展示" aria-hidden="true">#</a> 3.3.5 查询结果展示</h4><p><strong>决策：表格为默认视图 + JSON 树形视图切换 + 聚合结果图表可视化。</strong></p><p><strong>文档结果（hits）：</strong></p><table><thead><tr><th>视图</th><th>说明</th></tr></thead><tbody><tr><td>表格视图（默认）</td><td>自动将 <code>_source</code> 展平为列，列可排序/调整宽度/选择显示隐藏</td></tr><tr><td>JSON 视图</td><td>可折叠的 JSON 树形展示，展示原始返回</td></tr></tbody></table><p>表格视图处理规则：</p><ul><li>顶层标量字段直接作为列</li><li>嵌套对象用 <code>.</code> 路径展示（如 <code>address.city</code>）</li><li>数组字段显示为 <code>[3 items]</code>，点击展开</li><li>超长文本截断显示，hover 查看全文</li></ul><p><strong>聚合结果（aggregations）：</strong></p><table><thead><tr><th>聚合类型</th><th>图表类型</th></tr></thead><tbody><tr><td><code>terms</code></td><td>柱状图 / 饼图（可切换）</td></tr><tr><td><code>date_histogram</code></td><td>折线图 / 面积图</td></tr><tr><td><code>avg</code> / <code>sum</code> / <code>max</code> / <code>min</code></td><td>数字卡片</td></tr><tr><td><code>range</code></td><td>柱状图</td></tr></tbody></table><p><strong>结果操作栏：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>共命中 12,500 条，本次返回 200 条  |  耗时 23ms
+[表格视图] [JSON视图]  |  导出: [CSV] [JSON]  |  [复制为 cURL]
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>导出限制：</strong> 单次导出最多 500 条（与查询上限一致），需要更多数据引导使用 scroll/导出工具。</p><hr><h2 id="_4-后端代理-api-设计" tabindex="-1"><a class="header-anchor" href="#_4-后端代理-api-设计" aria-hidden="true">#</a> 4. 后端代理 API 设计</h2><h3 id="_4-1-api-总览" tabindex="-1"><a class="header-anchor" href="#_4-1-api-总览" aria-hidden="true">#</a> 4.1 API 总览</h3><p>所有 API 统一前缀：<code>/api/es</code></p><table><thead><tr><th>模块</th><th>方法</th><th>路径</th><th>说明</th></tr></thead><tbody><tr><td>集群</td><td>GET</td><td><code>/api/es/cluster/health</code></td><td>集群健康状态</td></tr><tr><td>集群</td><td>GET</td><td><code>/api/es/cluster/stats</code></td><td>集群统计信息</td></tr><tr><td>集群</td><td>GET</td><td><code>/api/es/nodes/stats</code></td><td>节点列表及指标</td></tr><tr><td>集群</td><td>GET</td><td><code>/api/es/shards</code></td><td>分片分配信息</td></tr><tr><td>索引</td><td>GET</td><td><code>/api/es/indices</code></td><td>索引列表（支持分页、搜索、筛选）</td></tr><tr><td>索引</td><td>POST</td><td><code>/api/es/indices</code></td><td>创建索引</td></tr><tr><td>索引</td><td>DELETE</td><td><code>/api/es/indices/{name}</code></td><td>删除索引</td></tr><tr><td>索引</td><td>GET</td><td><code>/api/es/indices/{name}/mapping</code></td><td>获取 mapping</td></tr><tr><td>索引</td><td>PUT</td><td><code>/api/es/indices/{name}/mapping</code></td><td>更新 mapping（仅新增字段）</td></tr><tr><td>查询</td><td>POST</td><td><code>/api/es/indices/{name}/search</code></td><td>执行查询</td></tr><tr><td>模板</td><td>GET</td><td><code>/api/es/templates</code></td><td>查询模板列表</td></tr><tr><td>模板</td><td>POST</td><td><code>/api/es/templates</code></td><td>保存查询模板</td></tr><tr><td>模板</td><td>DELETE</td><td><code>/api/es/templates/{id}</code></td><td>删除查询模板</td></tr></tbody></table><h3 id="_4-2-关键-api-请求-响应示例" tabindex="-1"><a class="header-anchor" href="#_4-2-关键-api-请求-响应示例" aria-hidden="true">#</a> 4.2 关键 API 请求/响应示例</h3><h4 id="创建索引" tabindex="-1"><a class="header-anchor" href="#创建索引" aria-hidden="true">#</a> 创建索引</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>POST /api/es/indices
+Content-Type: application/json
+
+{
+  &quot;name&quot;: &quot;my-index&quot;,
+  &quot;settings&quot;: {
+    &quot;number_of_shards&quot;: 1,
+    &quot;number_of_replicas&quot;: 1
+  },
+  &quot;mappings&quot;: {
+    &quot;properties&quot;: {
+      &quot;title&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;analyzer&quot;: &quot;ik_max_word&quot; },
+      &quot;status&quot;: { &quot;type&quot;: &quot;keyword&quot; },
+      &quot;count&quot;: { &quot;type&quot;: &quot;integer&quot; },
+      &quot;created&quot;: { &quot;type&quot;: &quot;date&quot; }
+    }
+  }
+}
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h4 id="执行查询" tabindex="-1"><a class="header-anchor" href="#执行查询" aria-hidden="true">#</a> 执行查询</h4><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>POST /api/es/indices/my-index/search
+Content-Type: application/json
+
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        { &quot;match&quot;: { &quot;title&quot;: &quot;搜索关键词&quot; } },
+        { &quot;term&quot;: { &quot;status&quot;: &quot;active&quot; } }
+      ],
+      &quot;filter&quot;: [
+        { &quot;range&quot;: { &quot;created&quot;: { &quot;gte&quot;: &quot;2024-01-01&quot;, &quot;lte&quot;: &quot;2024-12-31&quot; } } }
+      ]
+    }
+  },
+  &quot;sort&quot;: [{ &quot;created&quot;: &quot;desc&quot; }],
+  &quot;size&quot;: 200,
+  &quot;_source&quot;: [&quot;title&quot;, &quot;status&quot;, &quot;count&quot;, &quot;created&quot;]
+}
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p><strong>后端代理处理逻辑：</strong></p><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>1. 校验 JSON 合法性
+2. 校验 size ≤ 500，超过截断
+3. 注入 timeout: &quot;30s&quot;
+4. 转发到 ES: GET /my-index/_search
+5. 记录审计日志: { user, index, query_hash, timestamp, took_ms }
+6. 返回结果（保持 ES 原始响应结构）
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><hr><h2 id="_5-前端组件结构" tabindex="-1"><a class="header-anchor" href="#_5-前端组件结构" aria-hidden="true">#</a> 5. 前端组件结构</h2><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>es-management/
+├── index.ts                          # 模块入口 &amp; 路由注册
+├── components/
+│   ├── cluster/
+│   │   ├── ClusterOverview.ts        # 集群概览卡片
+│   │   ├── NodeList.ts               # 节点列表
+│   │   └── ShardAllocation.ts        # 分片分配表
+│   ├── indices/
+│   │   ├── IndexList.ts              # 索引列表页
+│   │   ├── CreateIndexDialog.ts      # 创建索引对话框
+│   │   ├── DeleteIndexDialog.ts      # 删除确认对话框
+│   │   ├── MappingViewer.ts          # Mapping 树形查看
+│   │   ├── MappingEditor.ts          # Mapping 编辑（新增字段）
+│   │   └── FieldTypeSelect.ts        # 字段类型选择器
+│   ├── query/
+│   │   ├── QueryWorkbench.ts         # 查询工具主容器
+│   │   ├── VisualQueryBuilder.ts     # 可视化查询构建器
+│   │   ├── DslEditor.ts             # DSL 编辑器（Monaco）
+│   │   ├── QueryTemplateList.ts      # 查询模板列表
+│   │   ├── QueryTemplateFiller.ts    # 模板参数填充
+│   │   ├── SaveTemplateDialog.ts     # 保存模板对话框
+│   │   ├── ResultTable.ts           # 结果表格视图
+│   │   ├── ResultJsonTree.ts        # 结果 JSON 视图
+│   │   ├── AggregationChart.ts      # 聚合结果图表
+│   │   └── QueryHistory.ts          # 查询历史
+│   └── shared/
+│       ├── HealthBadge.ts           # 健康状态信号灯组件
+│       ├── BytesFormatter.ts        # 字节数格式化
+│       └── IndexSelector.ts         # 索引选择下拉框
+├── services/
+│   └── esApi.ts                     # 后端代理 API 封装
+├── types/
+│   └── es.ts                        # TypeScript 类型定义
+└── utils/
+    ├── dslBuilder.ts                # 可视化条件 → DSL 转换
+    ├── flattenSource.ts             # _source 展平为表格列
+    └── exportData.ts                # CSV / JSON 导出
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><hr><h2 id="_6-关键交互流程" tabindex="-1"><a class="header-anchor" href="#_6-关键交互流程" aria-hidden="true">#</a> 6. 关键交互流程</h2><h3 id="_6-1-可视化查询-→-dsl-生成流程" tabindex="-1"><a class="header-anchor" href="#_6-1-可视化查询-→-dsl-生成流程" aria-hidden="true">#</a> 6.1 可视化查询 → DSL 生成流程</h3><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>用户在可视化构建器中:
+  1. 选择索引 → 自动加载该索引的 mapping (GET /api/es/indices/{name}/mapping)
+  2. mapping 字段列表填充到&quot;字段&quot;下拉框
+  3. 根据字段类型动态调整可用&quot;操作符&quot;和&quot;值输入组件&quot;
+     - text 类型 → 文本输入框
+     - keyword 类型 → 文本输入框（或枚举下拉，如有）
+     - date 类型 → 日期选择器
+     - boolean 类型 → 开关/下拉
+     - number 类型 → 数字输入框
+  4. 用户配置条件后，前端实时生成 DSL JSON (dslBuilder.ts)
+  5. 点击&quot;查看生成的 DSL&quot;可预览/复制
+  6. 点击&quot;查询&quot;提交到后端代理
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h3 id="_6-2-创建索引流程" tabindex="-1"><a class="header-anchor" href="#_6-2-创建索引流程" aria-hidden="true">#</a> 6.2 创建索引流程</h3><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>  1. 点击&quot;创建索引&quot;按钮
+  2. 弹出创建对话框 (表单模式)
+  3. 填写索引名 → 前端实时校验格式
+  4. 配置分片数、副本数
+  5. 添加 mapping 字段 (可选)
+  6. 点击&quot;预览 JSON&quot;查看将要发送的请求体
+  7. 点击&quot;创建&quot; → 后端校验索引名唯一性 → 调用 ES PUT API
+  8. 成功 → 关闭对话框，刷新索引列表
+  9. 失败 → 展示 ES 返回的错误信息
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr><h2 id="_7-es-api-调用参考" tabindex="-1"><a class="header-anchor" href="#_7-es-api-调用参考" aria-hidden="true">#</a> 7. ES API 调用参考</h2><p>汇总本方案涉及的所有 ES 官方 API：</p><table><thead><tr><th>用途</th><th>ES API</th><th>方法</th></tr></thead><tbody><tr><td>集群健康</td><td><code>_cluster/health</code></td><td>GET</td></tr><tr><td>集群统计</td><td><code>_cluster/stats</code></td><td>GET</td></tr><tr><td>节点统计</td><td><code>_nodes/stats</code></td><td>GET</td></tr><tr><td>分片信息</td><td><code>_cat/shards?format=json</code></td><td>GET</td></tr><tr><td>索引列表</td><td><code>_cat/indices?format=json</code></td><td>GET</td></tr><tr><td>创建索引</td><td><code>/{index}</code></td><td>PUT</td></tr><tr><td>删除索引</td><td><code>/{index}</code></td><td>DELETE</td></tr><tr><td>获取 mapping</td><td><code>/{index}/_mapping</code></td><td>GET</td></tr><tr><td>更新 mapping</td><td><code>/{index}/_mapping</code></td><td>PUT</td></tr><tr><td>搜索查询</td><td><code>/{index}/_search</code></td><td>GET/POST</td></tr><tr><td>索引是否存在</td><td><code>/{index}</code></td><td>HEAD</td></tr></tbody></table><hr><h2 id="_8-未来扩展方向-本期不实现" tabindex="-1"><a class="header-anchor" href="#_8-未来扩展方向-本期不实现" aria-hidden="true">#</a> 8. 未来扩展方向（本期不实现）</h2><table><thead><tr><th>方向</th><th>说明</th></tr></thead><tbody><tr><td>权限管理</td><td>基于角色的索引访问控制，对接运维系统的用户体系</td></tr><tr><td>告警通知</td><td>集群状态异常/磁盘不足时自动通知</td></tr><tr><td>ILM 策略管理</td><td>可视化配置索引生命周期策略</td></tr><tr><td>Reindex 工具</td><td>可视化 reindex 任务管理，带限流和进度追踪</td></tr><tr><td>数据导入</td><td>支持 CSV/JSON 文件批量导入到索引</td></tr><tr><td>多集群管理</td><td>管理多个 ES 集群，统一切换</td></tr><tr><td>SQL 查询</td><td>对接 ES SQL 插件，支持 SQL 语法查询</td></tr></tbody></table><!--]--></div><footer class="page-meta"><div class="meta-item edit-link"><a class="external-link meta-item-label" href="https://github.com/ivan0525/fe-notes/edit/main/docs/others/elasticsearch-management-design.md" rel="noopener noreferrer" target="_blank" aria-label="愿意帮助我？"><!--[--><!--]--> 愿意帮助我？ <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewbox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span><!--[--><!--]--></a></div><div class="meta-item last-updated"><span class="meta-item-label">上次更新: </span><!----></div><div class="meta-item contributors"><span class="meta-item-label">贡献者: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: zhuangyufeng189@gmail.com">ivan0525</span><!----><!--]--><!--]--></span></div></footer><!----><!--[--><!--]--></main><!--]--></div><!----><!--]--></div>
+    <script type="module" src="/fe-notes/assets/app.db9de137.js" defer></script>
+  </body>
+</html>
